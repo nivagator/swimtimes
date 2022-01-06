@@ -1,0 +1,22 @@
+extends layout 
+
+block content 
+  h1= title 
+  p Add new meet to the database 
+
+  form(action="/meets/add", method="POST")
+    div 
+      lable(for="meetName") Meet Name: 
+      input(name="meetName")
+    br
+    div 
+      label(for="course") Course: 
+      select(name="course")
+        option(value="SCY") Short Course Yards 
+        option(value="LCM") Long Course Meters 
+    br
+    div 
+      lable(for="startDate") Start Date:
+      input(type="date" name="startDate")
+    br 
+    button(type="submit") Submit Meet

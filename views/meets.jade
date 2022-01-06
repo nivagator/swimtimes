@@ -1,0 +1,43 @@
+extends layout 
+
+block content 
+  -function prettyDate(dateString){
+      -var date = new Date(dateString);
+      -var d = date.getDate();
+      -d = '0'.concat(d.toString()).substr(-2);
+      -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+      -var m = date.getMonth()+1;
+      -m = '0'.concat(m.toString()).substr(-2);
+      -var y = date.getFullYear();
+      -var h = date.getHours();
+      -var min = '0'.concat(date.getMinutes()).substr(-2);
+      -var ap = 'am'
+      -if (h > 12) {
+        -h = h-12
+        -ap = 'pm'
+      -}
+      -return m+'/'+d+'/'+y; //m+'/'+d+' '+h+':'+min+ap; //
+  -}
+
+  h1= title 
+  p a list of all meets in the database
+  p 
+  p #[a(href="/") Home]
+  p #[a(href="/meets/add") Create Meet]
+
+  table
+    thead 
+      tr 
+        th Date 
+        th Course 
+        th Meet Name
+        th 
+
+    tbody 
+      each meet in meet_list
+        tr 
+          td #{prettyDate(meet.start_date)}
+          td #{meet.course}
+          td #{meet.meet_name}
+          td #[a(href='/meets/#{meet.meet_id}') Edit]
+          td #[a(href='/meets/delconf/#{meet.meet_id}') Delete]

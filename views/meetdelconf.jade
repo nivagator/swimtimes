@@ -1,0 +1,37 @@
+extends layout 
+
+block content 
+  -function prettyDate(dateString){
+      -var date = new Date(dateString);
+      -var d = date.getDate();
+      -d = '0'.concat(d.toString()).substr(-2);
+      -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+      -var m = date.getMonth()+1;
+      -m = '0'.concat(m.toString()).substr(-2);
+      -var y = date.getFullYear();
+      -var h = date.getHours();
+      -var min = '0'.concat(date.getMinutes()).substr(-2);
+      -var ap = 'am'
+      -if (h > 12) {
+        -h = h-12
+        -ap = 'pm'
+      -}
+      -return m+'/'+d+'/'+y; //m+'/'+d+' '+h+':'+min+ap; //
+  -}
+  h1= title 
+
+  h2 Are you sure you want to delete the following meet from the database?
+
+  p Meet ID: #{meetInfo.meet_id}
+  p Name: #{meetInfo.meet_name}
+  p Course: #{meetInfo.course}
+  p Start Date: #{prettyDate(meetInfo.start_date)}
+  p Deleted: #{meetInfo.meet_delete}
+
+  form(action="/meets/delconf/#{meetInfo.meet_id}", method="POST")
+    //- input(type="hidden" name="_method" value="PUT")
+    input(type="hidden" name="meetId" value="#{meetInfo.meet_id}")
+    button(type="submit") Yes Delete
+  //- p yes 
+  p #[a(href="/meets") No Keep It]
+    

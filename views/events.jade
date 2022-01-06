@@ -1,0 +1,19 @@
+extends layout 
+
+block content 
+  h1= title 
+  p a list of all events in the database
+  p an event is simply the combination of course (SCY or LCM), distance and stroke
+  p #[a(href="/") Home]
+
+  table
+    thead 
+      tr 
+        th Course 
+        th Stroke
+    
+    tbody 
+      each event in event_list
+        tr 
+          td #{event.course}
+          td #{event.stroke}
